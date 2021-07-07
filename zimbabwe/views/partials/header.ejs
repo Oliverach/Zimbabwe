@@ -1,0 +1,21 @@
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="/">Home</a>
+    <% if(!locals.user){ %>
+        <a class="nav-link" href="/user">Login</a>
+        <a class="nav-link" href="/user/register">Register</a>
+        <% }else{%>
+            <a class="nav-link" href="/video/upload">Upload</a>
+            <a class="nav-link" href="/playlist">Playlists</a>
+            <a class="nav-link" href="/user/profile">Profile</a>
+            <a class="nav-link" href="/user/logout">Logout</a>
+            <% }%>
+</div>
+<% if(locals.user){ %>
+    <h5 id="username">
+        <%=locals.user.username %>
+    </h5>
+    <% }%>
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; <a href="/"
+                style="color:white;">Zimbabwe</a></span>
+       

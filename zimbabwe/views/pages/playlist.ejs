@@ -1,0 +1,32 @@
+<%- include('../partials/head'); %>
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<h2 class="text-center">Playlists</h2>
+<ul class="list-group w-25 m-auto" >
+<% for (var i = 0; i < obj.length; i++) { %>
+    <li class="list-group-item">
+        <a  style="color:white" href="/playlist/watch?id=<%= obj[i].id %>">
+            <p>
+                <%= obj[i].name %>
+            </p>
+        </a>
+    </li>
+<% } %>
+</ul>
+
+<form action="/playlist/createPlaylist" method="POST">
+<div class="d-grid gap-2 mx-auto w-25 mt-3">
+    <label for="name">Name</label>
+    <input name="name" type="text" class="form-control" id="Name" placeholder="Enter name" required>
+    <button type="submit" name="submit" class="btn btn-primary ">Create playlist</button>
+</div>
+</form>
+<% if(messages.space_in_name){ %>
+    <div class="alert alert-danger">
+    <%= messages.space_in_name %>
+    </div>
+<% }%>
+</main>
+<% include('../partials/footer'); %>

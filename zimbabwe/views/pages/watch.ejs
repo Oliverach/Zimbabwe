@@ -1,0 +1,102 @@
+<%- include('../partials/head'); %>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+    <div class="row videoContainer">
+        <div class="row">
+            <video controls>
+                <source src="<%= video[0].filepath %>" type="video/mp4">
+            </video>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>
+                    <%= video[0].title %>
+                </h2>
+                <h4>
+                    <%= video[0].description %>
+                </h4>
+
+            </div>
+            <div class="col">
+                <div class="flex-container">
+                    <div class="right">
+                        <%= like[0].amount %>
+                            <a href="/reaction/like?id=<%= video[0].id %>" class="icon">
+                                <i class=" bi bi-hand-thumbs-up-fill" style=<%=t_up_color %>></i>
+                            </a>
+                    </div>
+                    <div class="right">
+                        <%= dislike[0].amount %>
+                            <a href="/reaction/dislike?id=<%= video[0].id %>" class="icon">
+                                <i class="bi bi-hand-thumbs-down-fill" style=<%=t_down_color %>></i>
+                            </a>
+                    </div>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary right" data-toggle="modal" data-target="#playlist">
+                        <i class="bi bi-list-ul"></i>
+                        SAVE
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <% if(video[0].comment == 1) { %>
+            <div class="row">
+                <form method="POST" action="/comment/addComment">
+                    <input type="hidden" name="video_id" value="<%= video[0].id %>">
+                    <div class="input-group mb-3">
+                        <input name="comment_text" type="textfield" class="form-control" id="InputComment"
+                            placeholder="Comment" required>
+                        <div class="input-group-append">
+                            <button name="submit" type="submit" class="btn btn-primary">Comment</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <ul style="list-style-type:none;">
+                    <% for (var i=0; i < comments.length; i++) {%>
+                        <li><%= comments[i].username %>: <%= comments[i].comment %></li>
+                        <%} %>
+                  </ul>  
+            </div>
+        <%} %>
+
+        
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="playlist" tabindex="-1" role="dialog" aria-labelledby="playlistLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="playlistLabel">Select Playlist</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/listedVideo/addVideoToPlaylists" method="POST">
+                    <input type="hidden" name="video_id" value="<%= video[0].id %>">
+                    <div class="modal-body">
+                        <% for (var i=0; i < playlists.length; i++) { let checked; for (var j=0; j < video.length; j++)
+                            { if(video[j].playlist_id==playlists[i].id){ checked="checked" ; break; } } %>
+                            <p>
+                                <%= playlists[i].name %>:
+                            </p>
+                            <input type="checkbox" name="<%= playlists[i].name %>" <%=checked%>>
+                            <%} %>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <Button type="submit"  class="btn btn-primary">save Changes</Button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </main>
+    <% include('../partials/footer'); %>

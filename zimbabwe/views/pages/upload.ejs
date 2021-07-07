@@ -1,0 +1,51 @@
+
+<%- include('../partials/head'); %>
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<h1>Upload</h1>
+    <form method="POST" action="/video/upload" enctype="multipart/form-data" class="w-25 m-auto">
+        <div class="form-group mt-5">
+            <label for="title">Title</label>
+            <input name="title" type="text" class="form-control" placeholder="Enter title" required>
+        </div>
+        <div class="form-group mt-3">
+            <label for="description">Description</label>
+            <input name="description" type="text" class="form-control" placeholder="Enter Description" required>
+        </div>
+        <div class="form-group mt-3">
+            <label for="file">Select File to upload (smaller than 10 MB and only .mp4 files)</label>
+            <input name="file" id="video" value="Upload" type="file" class="form-control" placeholder="Upload file" accept="video/mp4" required>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <label class="custom-control-label" for="customCheck1">Enable Comment:</label>
+            <input name="comment" type="checkbox" class="custom-control-input" value="1" id="customCheck1">
+            <input name="comment" type="hidden" class="custom-control-input" value="0" id="customCheck1Hidden">
+            <script>
+            if(document.getElementById("customCheck1").checked) {
+                document.getElementById('customCheck1Hidden').disabled = true;
+                document.getElementById('customCheck1Hidden').setAttribute('name', 'a');
+            }
+            </script>
+        </div>
+        <div class="form-group mt-1">
+            <input value="Publish video" type="submit" class="form-control mt-4" required>
+        </div>
+        
+        <% if(messages.file_size_limit){ %>
+            <div class="alert alert-danger">
+            <%= messages.file_size_limit %>
+            </div>
+        <% }%>
+
+        <% if(messages.file_upload_success){ %>
+            <div class="alert alert-success">
+            <%= messages.file_upload_success %>
+            </div>
+        <% }%>
+        
+        </div>
+    </form>
+
+<%- include('../partials/footer'); %>

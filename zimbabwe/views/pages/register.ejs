@@ -1,0 +1,24 @@
+
+<%- include('../partials/head'); %>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+    <h1>Register</h1>
+        <form method="POST" action="/user/doRegister" class="w-25 m-auto mt-5">
+            <div class="form-group mt-2">
+                <label for="InputUsername">Username</label>
+                <input name="username" type="text" class="form-control" id="InputUsername" placeholder="Enter username" required>
+            </div>
+            <div class="form-group mt-2">
+                <label for="InputEmail">Email address</label>
+                <input name="email" type="email" class="form-control" id="InputEmail" placeholder="Enter email" required>
+            </div>
+            <div class="form-group mt-2">
+                <label for="InputPassword">Password</label>
+                <input name="password" type="password" class="form-control" id="InputPassword" placeholder="Enter password" required>
+            </div>
+            <button name="submit" type="submit" class="btn btn-primary mt-3">Register</button>
+            <p>Already have an account? <a href="/user/login">Login!</a></p>
+        </form>
+  
+<%- include('../partials/footer'); %>

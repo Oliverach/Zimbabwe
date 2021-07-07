@@ -1,0 +1,21 @@
+<%- include('../partials/head'); %>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+    <h1>Home</h1>
+    <div class="flex-container">
+        <% for (var i=0; i < obj.length; i++) {%>
+
+            <a href="/video/watch?id=<%= obj[i].id %>">
+                <video class="preview">
+                    <source src="<%= obj[i].filepath %>" type="video/mp4">
+                </video>
+                <h4 style="color:white;">
+                    <%= obj[i].title %>
+                </h4>
+            </a>
+
+            <% } %>
+    </div>
+    </main>
+    <% include('../partials/footer'); %>
